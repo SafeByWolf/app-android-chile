@@ -1709,9 +1709,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     try {
                         getVariablesFromDatabase(value.getData());
                         ejecutarAccionVariablesFromDatabase();
-                        if(latitudUserFromDB == 0.0f || longitudUserFromDB == 0.0f) {
-                            iniciarLocationService("Normal", "false");
-                            taskSinGPS();
+                        if(latitudUserFromDB != 0.0f || longitudUserFromDB != 0.0f) {
+                            detenerLocationListener();
+                            detenerTaskSinGPS();
                         }
                     }
                     catch (Exception err){
@@ -1738,9 +1738,9 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     try {
                         getVariablesFromDatabase(value.getData());
                         ejecutarAccionVariablesFromDatabase();
-                        if(latitudUserFromDB == 0.0f || longitudUserFromDB == 0.0f) {
-                            iniciarLocationService("Normal", "false");
-                            taskSinGPS();
+                        if(latitudUserFromDB != 0.0f || longitudUserFromDB != 0.0f) {
+                            detenerLocationListener();
+                            detenerTaskSinGPS();
                         }
                     }
                     catch (Exception err){
@@ -9056,16 +9056,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             timerContadorFPS.cancel();
             timerContadorFPS = null;
         }
-        //se cancela timer sinGPS
-        if(timerSinGPS != null){
-            timerSinGPS.cancel();
-            timerSinGPS = null;
-        }
-        //se cancela timerTask sinGPS
-        if(timerTaskSinGPS != null){
-            timerTaskSinGPS.cancel();
-            timerTaskSinGPS = null;
-        }
+
+        detenerTaskSinGPS();
 
         //Cancela timer de conexion a internet
         if(timerTaskConexion!=null){
@@ -9124,6 +9116,19 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         }
     }
 
+    public void detenerTaskSinGPS(){
+        //se cancela timer sinGPS
+        if(timerSinGPS != null){
+            timerSinGPS.cancel();
+            timerSinGPS = null;
+        }
+        //se cancela timerTask sinGPS
+        if(timerTaskSinGPS != null){
+            timerTaskSinGPS.cancel();
+            timerTaskSinGPS = null;
+        }
+    }
+
     public void dialogErrorIngreso(String title, String message) {
         AlertDialog dialog = new AlertDialog.Builder(DetectorActivity.this)
                 .setTitle(title)
@@ -9141,6 +9146,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     public synchronized void onResume() {
         iniciarGoogleMap();
         initTextToSpeech();
+
+        if(latitudUserFromDB == 0.0f || longitudUserFromDB == 0.0f) {
+            iniciarLocationService("Normal", "false");
+            taskSinGPS();
+        }
+
         Log.v("monresume","Se ejecuta onResume() de detector activity");
         touchListener();
         contadorFPS();
