@@ -1437,7 +1437,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             textViewModeloValue.setVisibility(View.GONE);
         }
 
-        encuestaManager.getEncuestasNoFinalizadas(emailUsuarioFirebase);
+        encuestaManager.getEncuestasNoFinalizadas(this, emailUsuarioFirebase);
     }
 
     @Override

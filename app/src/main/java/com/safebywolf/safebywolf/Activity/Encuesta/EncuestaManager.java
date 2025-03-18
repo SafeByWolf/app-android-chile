@@ -50,6 +50,7 @@ public class EncuestaManager {
     private static EncuestaManager instancia;
     private List<EncuestaPatrullero> encuestasPatrulleros;
     private List<EncuestaPatrullero> encuestasEnvioPendientes = new ArrayList<>();
+    private List<EncuestaPatrullero> encuestasAntiguas;
     private DetectorActivity contexto;
     private Timer timer = new Timer();
     private int tiempoActivacionEncuestaMinutos = 30;
@@ -61,6 +62,7 @@ public class EncuestaManager {
 
     private EncuestaManager(DetectorActivity context) {
         encuestasPatrulleros = new ArrayList<>();
+        encuestasAntiguas = new ArrayList<>();
         contexto = context;
     }
 
@@ -276,7 +278,7 @@ public class EncuestaManager {
         return false;
     }
 
-    public void getEncuestasNoFinalizadas(String emailUsuario) {
+    public void getEncuestasNoFinalizadas(DetectorActivity context, String emailUsuario) {
         String API_URL = BuildConfig.BUILD_TYPE.equalsIgnoreCase("release")
                 ? contexto.getResources().getString(R.string.prod_api)
                 : contexto.getResources().getString(R.string.dev_api);
@@ -299,6 +301,7 @@ public class EncuestaManager {
                 if (response.isSuccessful() && response.body() != null) {
                     List<EncuestaPatrullero> encuestas = response.body();
                     encuestasPatrulleros.addAll(encuestas);
+                    abrirSiguienteEncuesta(context);
                     Log.v("ENCUESTAPATRULLERO", "Encuestas no finalizadas obtenidas y guardadas: " + encuestas.size());
                 } else {
                     Log.e("ENCUESTAPATRULLERO", "Error en la respuesta: " + response.code() + " - " + response.message());
@@ -320,5 +323,18 @@ public class EncuestaManager {
     public void setEncuestaAbierta(Boolean encuestaAbierta) {this.encuestaAbierta = encuestaAbierta;}
 
     public Boolean getEncuestaAbierta() {return this.encuestaAbierta;}
+
+
+    private void abrirSiguienteEncuesta(DetectorActivity context) {
+        if (!encuestasAntiguas.isEmpty()) {
+            EncuestaPatrullero encuesta = encuestasAntiguas.remove(0);
+            abrirEncuesta(contexto, encuesta);
+        } else if (!encuestasPatrulleros.isEmpty()) {
+            EncuestaPatrullero encuesta = encuestasPatrulleros.remove(0);
+            abrirEncuesta(context, encuesta);
+        } else {
+            Log.v("ENCUESTAPATRULLERO","No hay mas encuestas pendientes");
+        }
+    }
 
 }
