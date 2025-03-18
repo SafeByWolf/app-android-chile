@@ -85,5 +85,6 @@ public class EncuestaFinalizada extends DialogFragment {
                 ((DialogFragment) fragment).dismiss();
             }
         }
+        encuestaManager.siguienteEncuesta();
     }
 }

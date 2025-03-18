@@ -135,7 +135,7 @@ public class EncuestaPatrullero implements Serializable {
                 ", patente='" + patente + '\'' +
                 ", observacion='" + observacion + '\'' +
                 ", contestada=" + contestada +
-                ", grupos='" + grupos + '\'' +
+                ", grupos='" + grupos.toString() + '\'' +
                 ", imagenPrincipalVehiculo='" + imagenPrincipalVehiculo + '\'' +
                 ", imagenEncuestaObservacion='" + imagenEncuestaObservacion + '\'' +
                 ", intentos=" + intentos +

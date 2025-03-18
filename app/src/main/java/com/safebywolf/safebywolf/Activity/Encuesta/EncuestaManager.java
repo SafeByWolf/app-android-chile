@@ -167,7 +167,6 @@ public class EncuestaManager {
     private void enviarEncuestaAlBackend(EncuestaPatrullero encuesta) {
         encuestaAbierta = false;
         Log.v("ENCUESTAPATRULLERO", "Se envian las encuestas al backend...");
-        abrirSiguienteEncuesta(contexto);
         String API_URL = "";
 
         if (BuildConfig.BUILD_TYPE.equalsIgnoreCase("release")) {
@@ -189,6 +188,8 @@ public class EncuestaManager {
         // Crear el cuerpo de la solicitud HTTP
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), encuestaJson);
         Call callTime = encuestaApi.enviarEncuesta(requestBody);
+
+        abrirSiguienteEncuesta(contexto);
 
         callTime.enqueue(new Callback() {
             @Override
@@ -328,12 +329,29 @@ public class EncuestaManager {
 
 
     private void abrirSiguienteEncuesta(DetectorActivity context) {
+        contexto = context;
+        Log.v("ENCUESTAPATRULLERO","[Encuesta] estoy abriendo las encuestas siguientes");
         if (!encuestasAntiguas.isEmpty()) {
             EncuestaPatrullero encuesta = encuestasAntiguas.remove(0);
+            Log.v("ENCUESTAPATRULLERO","[Encuesta] quedan:"+encuestasAntiguas.size()+" encuestas antiguas por responder.");
             abrirEncuesta(contexto, encuesta);
         } else if (!encuestasPatrulleros.isEmpty()) {
             EncuestaPatrullero encuesta = encuestasPatrulleros.remove(0);
             abrirEncuesta(context, encuesta);
+        } else {
+            Log.v("ENCUESTAPATRULLERO","No hay mas encuestas pendientes");
+        }
+    }
+
+    public void siguienteEncuesta() {
+        Log.v("ENCUESTAPATRULLERO","[Encuesta] estoy abriendo las encuestas siguientes");
+        if (!encuestasAntiguas.isEmpty()) {
+            EncuestaPatrullero encuesta = encuestasAntiguas.remove(0);
+            Log.v("ENCUESTAPATRULLERO","[Encuesta] quedan:"+encuestasAntiguas.size()+" encuestas antiguas por responder.");
+            abrirEncuesta(contexto, encuesta);
+        } else if (!encuestasPatrulleros.isEmpty()) {
+            EncuestaPatrullero encuesta = encuestasPatrulleros.remove(0);
+            abrirEncuesta(contexto, encuesta);
         } else {
             Log.v("ENCUESTAPATRULLERO","No hay mas encuestas pendientes");
         }
