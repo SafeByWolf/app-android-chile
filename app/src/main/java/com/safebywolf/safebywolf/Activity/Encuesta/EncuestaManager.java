@@ -167,6 +167,7 @@ public class EncuestaManager {
     private void enviarEncuestaAlBackend(EncuestaPatrullero encuesta) {
         encuestaAbierta = false;
         Log.v("ENCUESTAPATRULLERO", "Se envian las encuestas al backend...");
+        abrirSiguienteEncuesta(contexto);
         String API_URL = "";
 
         if (BuildConfig.BUILD_TYPE.equalsIgnoreCase("release")) {
