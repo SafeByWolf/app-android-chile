@@ -23,7 +23,6 @@ import com.safebywolf.safebywolf.Class.Utils.Log;
 import com.safebywolf.safebywolf.Class.Utils.Utils;
 import com.safebywolf.safebywolf.Model.EncuestaPatrullero;
 import com.safebywolf.safebywolf.R;
-import com.safebywolf.safebywolf.utils.SerializableUtils;
 
 import java.io.Serializable;
 
