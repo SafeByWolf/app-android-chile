@@ -109,7 +109,7 @@ public class EncuestaObservacionSecundaria extends DialogFragment {
                     public void onResponse(Call call, Response response) {
                         encuestaManager.setEncuestaAbierta(false);
                         if (response.code() == 200) {
-                            Toast.makeText(EncuestaObservacionSecundaria.this.getActivity(), "Encuesta enviada exitosamente!", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(EncuestaObservacionSecundaria.this.getActivity(), "Encuesta enviada exitosamente!", Toast.LENGTH_SHORT).show();
                             // Crear un Bundle y agregar un parámetro
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("Encuesta", encuesta);
@@ -119,7 +119,7 @@ public class EncuestaObservacionSecundaria extends DialogFragment {
                             dialogFragment.show(getActivity().getSupportFragmentManager(), "dialog_fragment");
                         } else {
                             Log.v("ENCUESTAPATRULLERO", "onFailure:" + response.toString());
-                            Toast.makeText(EncuestaObservacionSecundaria.this.getActivity(), "Error al enviar la encuesta", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(EncuestaObservacionSecundaria.this.getActivity(), "Error al enviar la encuesta", Toast.LENGTH_SHORT).show();
                             encuestaManager.agregarEncuestaEnvioPendiente(encuesta);
                             // Crear un Bundle y agregar un parámetro
                             Bundle bundle = new Bundle();
@@ -134,7 +134,7 @@ public class EncuestaObservacionSecundaria extends DialogFragment {
 
                     @Override
                     public void onFailure(Call call, Throwable t) {
-                        Toast.makeText(EncuestaObservacionSecundaria.this.getActivity(), "Fallo al enviar la encuesta", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(EncuestaObservacionSecundaria.this.getActivity(), "Fallo al enviar la encuesta", Toast.LENGTH_SHORT).show();
                         Log.v("ENCUESTAPATRULLERO","onFailure:" + t.toString());
                         encuestaManager.agregarEncuestaEnvioPendiente(encuesta);
                         // Crear un Bundle y agregar un parámetro
@@ -146,15 +146,6 @@ public class EncuestaObservacionSecundaria extends DialogFragment {
                         dialogFragment.show(getActivity().getSupportFragmentManager(), "dialog_fragment");
                     }
                 });
-
-                // Crear un Bundle y agregar un parámetro
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("Encuesta", encuesta);
-                // Mostrar un DialogFragment con el parámetro
-                EncuestaFinalizada dialogFragment = new EncuestaFinalizada();
-                dialogFragment.setArguments(bundle);
-                dialogFragment.show(getActivity().getSupportFragmentManager(), "dialog_fragment");
-
             }
         });
 
