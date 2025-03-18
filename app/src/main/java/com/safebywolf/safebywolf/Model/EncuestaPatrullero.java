@@ -4,6 +4,7 @@ import com.google.firebase.firestore.ServerTimestamp;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class EncuestaPatrullero implements Serializable {
     String id;
@@ -11,7 +12,7 @@ public class EncuestaPatrullero implements Serializable {
     String patente;
     String observacion;
     Boolean contestada;
-    String grupos;
+    List<String> grupos;
     String imagenPrincipalVehiculo;
     String imagenEncuestaObservacion;
     Integer intentos;
@@ -25,7 +26,7 @@ public class EncuestaPatrullero implements Serializable {
             String patente,
             String observacion,
             Boolean contestada,
-            String grupos,
+            List<String> grupos,
             String imagenPrincipalVehiculo,
             Integer intentos,
             Boolean finalizado,
@@ -82,11 +83,11 @@ public class EncuestaPatrullero implements Serializable {
         this.contestada = contestada;
     }
 
-    public String getGrupos() {
+    public List<String> getGrupos() {
         return grupos;
     }
 
-    public void setGrupos(String grupos) {
+    public void setGrupos(List<String> grupos) {
         this.grupos = grupos;
     }
 

@@ -29,6 +29,7 @@ import com.safebywolf.safebywolf.Model.PatenteRobadaVista;
 import com.safebywolf.safebywolf.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -88,8 +89,8 @@ public class EncuestaManager {
             String correoPatrullero = Utils.leerValorString(context, Referencias.CORREO);
             String grupos = Utils.leerValorSetString(context, Referencias.GRUPO).toString();
             String id = firebaseFirestore.collection(Referencias.ENCUESTAS).document().getId();
-            EncuestaPatrullero encuestaNueva =
-                    new EncuestaPatrullero(id, correoPatrullero, patenteRobada.getPatente(), "", false, grupos, patenteRobada.getUrlImagen(), intentosParaSaltarEncuesta, false, false, "");
+            List<String> gruposList = Arrays.asList(grupos.split("\\s*,\\s*")); // Separa por comas, eliminando espacios
+            EncuestaPatrullero encuestaNueva = new EncuestaPatrullero(id, correoPatrullero, patenteRobada.getPatente(), "", false, gruposList, patenteRobada.getUrlImagen(), intentosParaSaltarEncuesta, false, false, "");
             enviarEncuestaProvisoria(encuestaNueva);
             Log.v("ENCUESTAPATRULLERO", "SE AGREGO LA ENCUESTA AL ARREGLO");
             encuestasPatrulleros.add(0,encuestaNueva);
