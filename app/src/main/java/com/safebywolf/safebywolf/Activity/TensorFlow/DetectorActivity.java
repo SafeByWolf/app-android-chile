@@ -734,10 +734,13 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     boolean encuestaAbierta = true;
 
+    boolean encuestasAntiguas = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getGlobalesFB();
+        leerLocales();
         // Setup handler for uncaught exceptions.
         Thread.setDefaultUncaughtExceptionHandler (new Thread.UncaughtExceptionHandler()
         {
@@ -1436,8 +1439,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             textViewOCRValue.setVisibility(View.GONE);
             textViewModeloValue.setVisibility(View.GONE);
         }
-
-        encuestaManager.getEncuestasNoFinalizadas(this, emailUsuarioFirebase);
+        if (encuestasAntiguas) {
+            Log.v("ENCUESTAPATRULLERO","[encuestaAntigua] que valor tiene?"+encuestasAntiguas);
+            encuestaManager.getEncuestasNoFinalizadas(this, emailUsuarioFirebase);
+        }
     }
 
     @Override
@@ -9504,6 +9509,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             encuestaAbierta =  Utils.leerValorBoolean(DetectorActivity.this,Referencias.ENCUESTAABIERTA);
         }
 
+        if(document.get("encuestasAntiguas") != null && Utils.isBoolean(document.get("encuestasAntiguas").toString())){
+            Utils.guardarValorBoolean(DetectorActivity.this, Referencias.ENCUESTAANTIGUA, Boolean.parseBoolean(document.get("encuestasAntiguas").toString()));
+            encuestasAntiguas =  Utils.leerValorBoolean(DetectorActivity.this,Referencias.ENCUESTAANTIGUA);
+            Log.v("ENCUESTAPATRULLERO","[encuestasAntiguas] valor:"+encuestasAntiguas);
+        }
+
         /**
          * Valores Enteros
          */
@@ -9993,11 +10004,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         esperaEnvioUbicacionTotemMilis = Utils.leerValorInt(DetectorActivity.this, Referencias.EENVIOUBICACIONTOTEM, esperaEnvioUbicacionTotemMilis);
 
         //ENCUESTA
-        Log.v("ENCUESTAPATRULLERO","tiempo de activacion encuesta en minutos -  modo leer:"+tiempoActivacionEncuestaMinutos);
         tiempoActivacionEncuestaMinutos = Utils.leerValorInt(DetectorActivity.this, Referencias.TIEMPOACTIVACIONENCUESTA, tiempoActivacionEncuestaMinutos);
-        Log.v("ENCUESTAPATRULLERO","tiempo de activacion encuesta en minutos -  modo leer:"+tiempoActivacionEncuestaMinutos);
         intentosParaSaltarEncuesta = Utils.leerValorInt(DetectorActivity.this, Referencias.INTENTOSSKIPENCUESTA, intentosParaSaltarEncuesta);
         tiempoVerificacionEncuestasPendientes = Utils.leerValorInt(DetectorActivity.this, Referencias.TIEMPOVERIFICACIONENCUESTASPENDIENTES, tiempoVerificacionEncuestasPendientes);
+        encuestasAntiguas =  Utils.leerValorBoolean(DetectorActivity.this,Referencias.ENCUESTAANTIGUA);
 
         Log.v("datosGlobales","esperaEnvioUbicacionTotemMilis: "+esperaEnvioUbicacionTotemMilis);
         Log.v("datosGlobales","frecuenciaCreacionUbicacionSegundos: "+ frecuenciaCreacionUbicacionMilis);
@@ -10180,6 +10190,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
         // Encuesta
         encuestaAbierta = true;
+        encuestasAntiguas = true;
         tiempoActivacionEncuestaMinutos = 30; // 30 minutos.
         intentosParaSaltarEncuesta = 3; // 3 oportunidades para saltar la encuesta.
         tiempoVerificacionEncuestasPendientes = 1; // 1 minuto para la verificacion de encuestas pendientes

@@ -193,6 +193,7 @@ public class Referencias {
     public static String INTENTOSSKIPENCUESTA = "3";
     public static String TIEMPOVERIFICACIONENCUESTASPENDIENTES = "1";
     public static String ENCUESTAABIERTA = "encuestaAbierta";
+    public static String ENCUESTAANTIGUA = "encuestasAntiguas";
 
     public static String LIMITEPARAACTUALIZARCUENTA = "isLimiteParaActualizarCuenta";
 
