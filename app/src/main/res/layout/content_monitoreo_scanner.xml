@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:gravity="center_horizontal|center_vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activity.TensorFlow.CameraActivity"
+    tools:showIn="@layout/activity_monitoreo_scanner">
+    <!--
+    android:paddingTop="?android:attr/actionBarSize"
+    -->
+
+    <LinearLayout
+        android:id="@+id/linearLayoutContetMonitoreo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_horizontal|center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- preview camera -->
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical">
+        </FrameLayout>
+
+        <!-- google maps-->
+        <fragment
+            android:id="@+id/mapFragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutBotones"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            android:weightSum="4">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingRight="2dp">
+
+                    <Button
+                        android:id="@+id/buttonTotem"
+                        style="@style/Widget.AppCompat.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/my_button_white"
+                        android:text="totem on"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- LinearLayout totem muestra datos como bateria, temperatura-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left|bottom"
+            android:orientation="vertical"
+            android:paddingTop="60dp"
+            android:paddingRight="5dp">
+            <!-- Temperatura de la CPU -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:id="@+id/textViewTemperaturaCPU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="T° CPU:"
+                    android:textColor="#39CD00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"></TextView>
+
+                <TextView
+                    android:id="@+id/textViewTemperaturaCPUNumero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#39CD00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"></TextView>
+            </LinearLayout>
+
+            <!--  Temperatura bateria -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:id="@+id/textViewTemperaturaBateria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="T° Bateria:"
+                    android:textColor="#39CD00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"></TextView>
+
+                <TextView
+                    android:id="@+id/textViewTemperaturaBateriaNumero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#39CD00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"></TextView>
+            </LinearLayout>
+
+            <!-- Nivel de bateria -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:id="@+id/textViewNivelBateria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nivel bateria:"
+                    android:textColor="#39CD00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"></TextView>
+
+                <TextView
+                    android:id="@+id/textViewNivelBateriaNumero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="#39CD00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"></TextView>
+            </LinearLayout>
+
+            <!-- Cargando -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp">
+
+                <TextView
+                    android:id="@+id/textViewCargando"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status batería:"
+                    android:textColor="#39CD00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"></TextView>
+
+                <TextView
+                    android:id="@+id/textViewCargandoString"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No cargando"
+                    android:textColor="#39CD00"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"></TextView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutTamanoAuto"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:background="@drawable/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutContetMonitoreo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayoutTamanoPatente"
+        android:layout_width="2dp"
+        android:layout_height="2dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:background="@drawable/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutContetMonitoreo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></RelativeLayout>
+
+    <!-- LinearLayout deja la pantalla en negro cuando se activa el totem -->
+    <RelativeLayout
+        android:id="@+id/linearLayoutNegro"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutContetMonitoreo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewModoTotem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="..."
+            android:textColor="#39CD00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="visible"></TextView>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

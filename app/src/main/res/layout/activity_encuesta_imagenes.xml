@@ -1,0 +1,155 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/MY_DIALOG_FRAGMENT"
+    android:padding="20dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_above="@id/buttonsContainer">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewEncuestaTituloRecuperado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="Imágenes"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <!-- Nuevo LinearLayout vertical que envuelve el LinearLayout horizontal y el ImageView -->
+            <LinearLayout
+                android:id="@+id/linearLayoutContenedorVertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:layout_below="@+id/textViewEncuestaTituloRecuperado">
+
+                <!-- LinearLayout horizontal para colocar dos LinearLayout uno al lado del otro -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Primer LinearLayout -->
+                    <LinearLayout
+                        android:id="@+id/linearLayoutSubirImagenCamara"
+                        android:layout_width="0dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/border_gray"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewSubirImagenCamara"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:gravity="center"
+                            android:text="Camara" />
+
+                        <ImageView
+                            android:id="@+id/imageViewEncuestaCamara"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:maxHeight="500dp"
+                            android:src="@drawable/ic_photo_camera_black_48dp"
+                            android:layout_gravity="center"
+                            android:adjustViewBounds="true"
+                            android:tint="@color/secondaryTextColor"
+                            android:contentDescription="Patente con encargo vigente" />
+                    </LinearLayout>
+
+                    <!-- Segundo LinearLayout -->
+                    <LinearLayout
+                        android:id="@+id/linearLayoutSubirImagenGaleria"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="2dp"
+                        android:background="@drawable/border_gray"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textViewSubirImagenGaleria"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:gravity="center"
+                            android:text="Galeria" />
+
+                        <ImageView
+                            android:id="@+id/imageViewEncuestaGaleria"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:maxHeight="500dp"
+                            android:src="@drawable/ic_gallery"
+                            android:layout_gravity="center"
+                            android:adjustViewBounds="true"
+                            android:tint="@color/secondaryTextColor"
+                            android:contentDescription="Patente con encargo vigente" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- ImageView debajo del LinearLayout horizontal -->
+                <ImageView
+                    android:id="@+id/imageViewImagenResuelta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:src="@drawable/linear_layout_border_black_patente"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Imagen debajo de los LinearLayout" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttonsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnEncuestaImagenesFinalizar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textColor="@color/white"
+            android:text="Finalizar" />
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:id="@+id/btnEncuestaImagenesVolver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borderless"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Volver"
+            android:textColor="@color/colorPrimary" />
+
+    </LinearLayout>
+
+</RelativeLayout>

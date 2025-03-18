@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.safebywolf.safebywolf",
+  "variantName": "fullRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 62,
+      "versionName": "2.0.25",
+      "outputFile": "SafeByWolf_v2.62-full-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

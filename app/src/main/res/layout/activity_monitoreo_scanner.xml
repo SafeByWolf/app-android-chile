@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/parent_layout"
+    tools:context=".Activity.TensorFlow.CameraActivity">
+
+    <!-- layout content monitoreo scanner -->
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_monitoreo_scanner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- LinearLayout muestra los tres puntos de menú configuración, desloguearse tree dot-->
+    <LinearLayout
+        android:id="@+id/menu_tree_dot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include">
+
+        <!-- Button dot -->
+        <LinearLayout
+            android:id="@+id/LinearLayoutButtonDot"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:paddingTop="16dp"
+            android:paddingRight="10dp"
+            android:gravity="right">
+            <ImageButton
+                android:id="@+id/imageButtonDot"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="3dp"
+                android:adjustViewBounds="true"
+                android:background="@android:color/transparent"
+                android:maxWidth="20dp"
+                android:maxHeight="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dot2"
+                android:tint="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--contenedor imagen con zoom -->
+    <LinearLayout
+        android:id="@+id/contenedorLinearLayoutCropPatenteAuto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:weightSum="1"
+
+        app:layout_constraintBottom_toTopOf="@+id/buttonTools"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutLogoEsquina">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight=".37"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutCenter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".26"
+            android:gravity="right">
+
+            <ImageView
+                android:id="@+id/imageViewPatenteCrop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+            </ImageView>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <!--button show dialog-->
+                <LinearLayout
+                    android:id="@+id/linearLayoutShow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:background="@drawable/borderless_primary"
+                    android:padding="0dp"
+                    android:visibility="gone">
+
+                    <ImageButton
+                        android:id="@+id/imageButtonShow"
+                        style="?android:attr/buttonBarButtonStyle"
+                        android:layout_width="45dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/right_arrow"></ImageButton>
+                </LinearLayout>
+
+                <!-- linearLayout Contenedor Button y Dialog -->
+                <LinearLayout
+                    android:id="@+id/linearLayoutContenedorButtonAndDialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".4"
+                    android:orientation="horizontal"
+                    android:translationX="0dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutRightDialog"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight=".4">
+
+                        <!--linearLayout dialog-->
+                        <LinearLayout
+                            android:id="@+id/linearLayoutCropPatenteAuto"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight=".2"
+                            android:background="@drawable/borderless"
+                            android:gravity="center_vertical|center_horizontal"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:weightSum="2"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <!--LinearLayout auto-->
+                            <LinearLayout
+                                android:id="@+id/linearLayoutAutoDialog"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical|center_horizontal"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/black"
+                                    android:gravity="center_vertical|center_horizontal">
+
+                                    <ImageView
+                                        android:id="@+id/imageViewAuto"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/black"></ImageView>
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!--button hide dialog-->
+                    <LinearLayout
+                        android:id="@+id/linearLayoutHide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:background="@drawable/borderless_primary"
+                        android:padding="0dp"
+                        android:visibility="gone">
+
+                        <ImageButton
+                            android:id="@+id/imageButtonHide"
+                            style="?android:attr/buttonBarButtonStyle"
+                            android:layout_width="45dp"
+                            android:layout_height="60dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/left_arrow">
+
+                        </ImageButton>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutLeftDialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".6"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:padding="2dp">
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutBottom"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".37">
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- info -->
+    <LinearLayout
+        android:id="@+id/linearLayoutInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/menu_tree_dot">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewVersionCodeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Version Code: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewVersionCodeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewEmailText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewEmailValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewFrameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Preview: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewFrameValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewCropText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crop: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewCropValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewInferenceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inference: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewInferenceValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewFPSText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FPS: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewFPSValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewPatenteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patente: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewPatenteValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewVelocidadText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Velocidad: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewVelocidadValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewMSText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" m/s"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewTemperaturaCPUText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Temperatura CPU: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewTemperaturaCPUValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewTemperaturaBateriaText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Temperatura Bateria: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewTemperaturaBateriaValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewConfianzaOCRText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confianza OCR: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewConfianzaOCRValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewConfianzaModeloText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confianza Modelo: "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+
+            <TextView
+                android:id="@+id/textViewConfianzaModeloValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"></TextView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- LinearLayout cantidad de patentes leidas distintas -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayoutPatentesLeidas"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:background="@drawable/linear_layout_border_black_patente"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLAyoutPatentesLeidasText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textViewPatentesLeidasText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Lecturas"
+                android:textColor="#000000"
+                android:textSize="10dp" />
+
+            <TextView
+                android:id="@+id/textViewPatentesLeidas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="0"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- patente alertada robada o lista negra -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLaoutPatentesLeidasText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/linearLayoutPatentesLeidas"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="12dp"
+        >
+        <LinearLayout
+            android:id="@+id/linearLayoutPatente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- LinearLayout muestra la ultima patente escaneada vista -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutPatenteEscaneadaVista"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:background="@drawable/linear_layout_border_black_patente"
+                    android:orientation="vertical"
+                    android:padding="6dp">
+
+                    <TextView
+                        android:id="@+id/textViewTituloPatenteEscaneada"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="Patente alertada"
+                        android:textColor="#000000"
+                        android:textSize="10dp" />
+
+                    <TextView
+                        android:id="@+id/textViewPatenteEscaneada"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutPuntoPatente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/linear_layout_circular_green"
+                    android:orientation="horizontal"
+                    android:visibility="gone"></LinearLayout>
+            </LinearLayout>
+
+            <!-- LinearLayout muestra la ultima robada vista -->
+            <LinearLayout
+                android:id="@+id/linearLayoutPatenteRobadaVista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutPatenteRed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/linear_layout_border_red_patente"
+                    android:orientation="vertical"
+                    android:padding="6dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="Patente en alerta"
+                        android:textColor="@color/colorWarning"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textViewPatenteRobadaVista"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutPuntoPatenteRed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/linear_layout_circular_red"
+                    android:orientation="horizontal"
+                    android:visibility="gone"></LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Linear layout contendor logo central-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutLogoEsquina"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="16dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageViewLogoEsquina"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/logoredondeado"
+            tools:layout_editor_absoluteX="4dp"
+            tools:layout_editor_absoluteY="2dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Contenedor de patentes escaneadas-->
+    <LinearLayout
+        android:id="@+id/linearLayoutContenedorPatentesEscaneadas"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPatentesLeidas">
+
+        <include
+            layout="@layout/patentes_escaneadas_row_item0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></include>
+
+        <include layout="@layout/patentes_escaneadas_row_item1"></include>
+
+        <include layout="@layout/patentes_escaneadas_row_item2"></include>
+
+        <include
+            layout="@layout/patentes_escaneadas_row_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></include>
+    </LinearLayout>
+
+    <!--contenedor preview (test)-->
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="90dp"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </LinearLayout>
+
+    <!-- tools menú -->
+    <LinearLayout
+        android:id="@+id/linearLayoutTools"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tools"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:animateLayoutChanges="true"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonTools"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <!-- Boton flotante busqueda-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/buttonConsultaAutoSeguro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:foregroundTint="@color/white"
+                android:src="@drawable/lupa_patente_n"
+                android:tint="@color/white"
+                android:visibility="visible"
+                app:backgroundTint="@color/gray"
+                android:layout_marginBottom="16dp"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toTopOf="@+id/floatingactionbuttonBattery"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:maxImageSize="30dp" />
+
+            <!-- boton flotante bateria-->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingactionbuttonBattery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/energiara"
+                android:visibility="visible"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="mini"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:maxImageSize="30dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <!-- Boton flotante tools-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/buttonTools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:foregroundTint="@color/white"
+        android:src="@android:drawable/ic_dialog_dialer"
+        android:tint="@color/white"
+        android:visibility="visible"
+        app:backgroundTint="@color/gray"
+        app:fabCustomSize="40dp"
+        app:fabSize="mini"
+        android:layout_marginStart="23dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutBotonesAbajo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:maxImageSize="20dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutBotonesAbajo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout8" >
+
+        <!-- Boton flotante mapa-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonSwitchCameraOrMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical"
+            android:src="@drawable/location"
+            android:visibility="visible"
+            app:backgroundTint="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutBotonesAbajo"
+            app:layout_constraintStart_toStartOf="@+id/linearLayoutBotonesAbajo"
+            app:maxImageSize="30dp"
+            />
+
+        <!-- Boton flotante centrar camara-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonCentrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/white"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            app:backgroundTint="@color/gray"
+            android:src="@drawable/my_location"
+            android:foregroundTint="@color/white"
+            app:fabCustomSize="40dp"
+            app:fabSize="mini"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutBotonesAbajo"
+            app:layout_constraintStart_toEndOf="@+id/buttonSwitchCameraOrMap"
+            app:maxImageSize="20dp" />
+
+        <!-- Boton zoom -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/buttonZoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foregroundTint="@color/white"
+            android:src="@drawable/eye"
+            android:tint="@color/white"
+            android:gravity="center_vertical"
+            android:visibility="visible"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabCustomSize="40dp"
+            app:fabSize="mini"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutBotonesAbajo"
+            app:layout_constraintStart_toEndOf="@+id/buttonSwitchCameraOrMap"
+            app:maxImageSize="20dp" />
+
+        <!--contenedor de barra de zoom y cantidad zoom -->
+        <LinearLayout
+            android:id="@+id/linearLayoutContenedorSeekbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutBotonesAbajo"
+            app:layout_constraintEnd_toEndOf="@+id/include"
+            app:layout_constraintStart_toEndOf="@+id/buttonZoom">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutSeekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:gravity=""
+                android:orientation="vertical">
+                <!--zoom -->
+                <!--android:layout_width="wrap_content" -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <SeekBar
+                            android:id="@+id/camera_sb_expose"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:max="99"
+                            android:progressDrawable="@drawable/seek_bar"
+                            android:thumb="@drawable/circulo_seek_bar" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+            <!-- text view contador zoom -->
+            <LinearLayout
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/textViewZoom"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingBottom="2dp"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

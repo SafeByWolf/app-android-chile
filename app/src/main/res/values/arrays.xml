@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listaOpcionesContacto">
+        <item>@string/opcionContactoGeneral</item>
+        <item>@string/opcionContactoBug</item>
+    </string-array>
+</resources>

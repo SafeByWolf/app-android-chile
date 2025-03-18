@@ -1,0 +1,61 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".safebywolf.Activity.MainActivity">
+    <item
+        android:id="@+id/cambiar_actividad"
+        android:orderInCategory="100"
+        android:title="Volver al Menú"
+        app:showAsAction="never"
+        android:visible="false"/>
+    <item
+        android:id="@+id/perfil"
+        android:orderInCategory="100"
+        android:title="@string/perfil"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/novedades"
+        android:orderInCategory="100"
+        android:title="@string/novedades"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/noticias"
+        android:orderInCategory="100"
+        android:title="@string/noticias"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/comunas"
+        android:orderInCategory="100"
+        android:title="@string/comunas"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/tutorial"
+        android:orderInCategory="100"
+        android:title="@string/tutorial"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/terminosYCondiciones"
+        android:orderInCategory="100"
+        android:title="@string/terminosYCondiciones"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/contacto"
+        android:orderInCategory="100"
+        android:title="Contáctanos"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="100"
+        android:title="@string/about"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/exit"
+        android:orderInCategory="100"
+        android:title="@string/salir"
+        app:showAsAction="never" />
+
+</menu>

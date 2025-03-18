@@ -1,0 +1,11 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- grosor de barra -->
+    <dimen name="seek_bar_thickness">10dp</dimen>
+    <!-- radio de pelota-->
+    <dimen name="seek_bar_thumb_size">26dp</dimen>
+</resources>

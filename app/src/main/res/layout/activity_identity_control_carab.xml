@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".safebywolf.Activity.IdentityControlCarab">
+
+    <ScrollView
+        android:id="@+id/scroll_view_handle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/AppTheme.AppBarOverlay">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/black"
+                    app:titleTextColor="@color/white"
+                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:orientation="vertical">
+                <!--Servicio-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    app:hintEnabled="false"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/servicioICB"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/servicio"
+                        android:inputType="textCapCharacters"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <!--Cuadrante-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    app:hintEnabled="false"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cuadranteICB"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/cuadrante"
+                        android:inputType="textCapCharacters"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <!--Lugar-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    app:hintEnabled="false"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/lugarICB"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/lugar"
+                        android:inputType="textCapCharacters"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--Patente-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    app:hintEnabled="false"
+                    android:paddingRight="10dp"
+
+                    android:paddingBottom="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/patenteICB"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_semi_bold"
+
+                        android:hint="@string/patente"
+
+                        android:inputType="textCapCharacters"
+                        android:maxLines="1"
+                        android:maxLength="6"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--Vehiculo-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    app:hintEnabled="false"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/vehiculoICB"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:inputType="textCapCharacters"
+                        android:hint="@string/vehiculo"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--Marca-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    app:hintEnabled="false"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/marcaICB"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:hint="@string/marca"
+                        android:inputType="textCapCharacters"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Modelo-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    app:hintEnabled="false"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/modeloICB"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_semi_bold"
+
+                        android:hint="@string/modelo"
+
+                        android:inputType="textCapCharacters"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Rut-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    app:hintEnabled="false"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <EditText
+                        android:id="@+id/rutICB"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:hint="@string/rut"
+                        android:maxLength="10"
+                        android:inputType="date"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Nombre-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    app:hintEnabled="false"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nombreICB"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:hint="@string/nombreC"
+                        android:inputType="textCapCharacters"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fechaN"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                </TextView>
+                <!--Fecha de Nacimiento-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:weightSum="3.2"
+                    android:gravity="center_vertical"
+                    app:hintEnabled="false"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_fecha"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:layout_height="45dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:paddingLeft="10dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/border_gray"
+                            android:hint="@string/dia"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:maxLength="2"
+
+
+                            />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="0.1" >
+                        </Space>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_fecha2"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="45dp"
+                            android:paddingLeft="10dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/border_gray"
+                            android:hint="@string/mes"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:maxLength="2"
+
+                            />
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="0.1" >
+                        </Space>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_fecha3"
+                            android:fontFamily="@font/montserrat_semi_bold"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="45dp"
+                            android:paddingLeft="10dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/border_gray"
+                            android:hint="@string/anio"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:maxLength="4"
+                            />
+                    </LinearLayout>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--Apellido.P-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/border_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    app:hintEnabled="false"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nacionalidadICB"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:hint="@string/nacionalidad"
+                        android:inputType="textCapCharacters"
+                        android:maxLines="1"
+                        android:singleLine="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/contenedorTexViewClick"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+            <!-- boton aceptar cancelar -->
+            <LinearLayout
+                android:id="@+id/contenedorBotonesAC"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:paddingTop="10dp"
+                >
+
+                <Button
+                    android:id="@+id/aceptarICB"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:layout_marginBottom="13dp"
+                    android:background="@color/gray"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:text="Aceptar"
+                    android:textStyle="bold"
+
+                    android:clickable = "true"
+                    android:enabled="true"
+                    />
+
+                <Button
+                    android:id="@+id/cancelarICB"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:text="Cancelar"
+
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

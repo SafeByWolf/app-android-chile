@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_above="@id/btnEncuestaPostergada">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewEncuestaPostergada"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:fontFamily="@font/montserrat_semi_bold"
+                android:text="Se volverá a preguntar en 15 minutos más."
+                android:textSize="18dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnEncuestaPostergada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="@color/white"
+        android:text="aceptar"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

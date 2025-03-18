@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "502884304562",
+    "firebase_url": "https://wolfplates-d0b11.firebaseio.com",
+    "project_id": "wolfplates-d0b11",
+    "storage_bucket": "wolfplates-d0b11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502884304562:android:14baadc55fb62f8af6abab",
+        "android_client_info": {
+          "package_name": "com.safebywolf.safebywolf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502884304562-eidqaosh1qf1j5mafh0nbsppvk9qa24l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.safebywolf.safebywolf",
+            "certificate_hash": "7c9a6088cd0b597b4eb50f666d74ccce092ec65a"
+          }
+        },
+        {
+          "client_id": "502884304562-1onocaop4rgtn5aq3p31p6effs8i3fee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM3MsvtAUe_iu1t0pD20EJ2bdoWis2zmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502884304562-1onocaop4rgtn5aq3p31p6effs8i3fee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

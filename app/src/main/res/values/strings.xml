@@ -1,0 +1,105 @@
+<resources>
+    <string name="prod_api">https://api.safebywolf.com/</string>
+    <string name="dev_api">https://api.safebywolf.link/</string>
+    <string name="app_name">SafeByWolf</string>
+    <string name="salir">Cerrar sesión</string>
+    <string name="terminosYCondiciones">Términos y condiciones</string>
+    <string name="about">Acerca de</string>
+    <string name="novedades">Novedades</string>
+    <string name="noticias">Noticias</string>
+    <string name="comunas">Comunas</string>
+    <string name="tutorial">Ver tutorial</string>
+    <string name="perfil">Mi perfil</string>
+    <string name="Monitoreo">Monitoreo</string>
+    <string name="title_activity_monitoreo_sanner">Monitoreo Scaner</string>
+    <string name="title_activity_auto_robado">Auto Robado</string>
+    <string name="title_activity_olvido_contrasena">Reestablecer Contraseña</string>
+    <string name="title_activity_registrar">REGISTRO</string>
+    <string name="title_activity_terminos">TÉRMINOS Y CONDICIONES</string>
+    <string name="title_activity_about">ACERCA DE</string>
+    <string name="title_activity_novedades">NOVEDADES</string>
+    <string name="title_activity_novedad">NOVEDAD</string>
+    <string name="title_activity_noticias">NOTICIAS</string>
+    <string name="title_activity_noticia">NOTICIA</string>
+    <string name="title_activity_comunas">COMUNAS</string>
+    <string name="title_activity_menu">SAFEBYWOLF</string>
+    <string name="title_activity_perfil">PERFIL</string>
+    <string name="title_activity_editar_perfil">EDITAR PERFIL</string>
+    <string name="title_activity_idc">CONTROL VEHÍCULO</string>
+    <string name="title_activity_contacto">CONTÁCTANOS</string>
+
+    <string name="title_activity_camera_x">CameraX</string>
+    <string name="title_activity_login">Wolf</string>
+    <string name="correo">Correo electrónico</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="repetirContraseña">Repetir contraseña</string>
+    <string name="nombre">Nombre</string>
+    <string name="codigo">Código (Opcional)</string>
+    <string name="apellido">Apellido</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="error_invalid_email">El correo electrónico ingresado es inválido</string>
+    <string name="error_invalid_email_do_not_match">Correos electrónicos ingresados no coinciden</string>
+    <string name="error_invalid_password">La contraseña es muy corta</string>
+    <string name="error_incorrect_password">La contraseña es incorrecta</string>
+    <string name="error_field_required">Este campo debe ser llenado</string>
+    <string name="permission_rationale">"Se requiere permisos de contactos para acceder a sus email."
+    </string>
+    <string name="servicio">Servicio</string>
+    <string name="cuadrante">Cuadrante</string>
+    <string name="lugar">Lugar</string>
+    <string name="vehiculo">Vehículo</string>
+    <string name="patente">Patente</string>
+    <string name="marca">Marca</string>
+    <string name="modelo">Modelo</string>
+    <string name="rut">Rut (12345678-9)</string>
+    <string name="nombreC">Nombre completo</string>
+    <string name="hora">Hora</string>
+    <string name="fechaN">Fecha de nacimiento</string>
+    <string name="dia">DD</string>
+    <string name="mes">MM</string>
+    <string name="anio">AAAA</string>
+    <string name="nacionalidad">Nacionalidad</string>
+    <string name="dialogInicial1">Así como se menciona en los “Términos y Condiciones” y explica en el tutorial, te recordamos que, si eres alertado de un vehículo que mantiene “encargo vigente por robo”, deberás mantener la calma y <b>NO</b> tomar acciones que le corresponden única y exclusivamente a las Fuerzas Policiales. Esta alerta es solo para que tengas precaución ante dicha situación, si no estás seguro de poder cumplir con lo anterior, por favor <b>NO UTILICES ESTA APLICACIÓN</b>.</string>
+    <string name="dialogInicial2">Si el Municipio en donde te encuentras está utilizando nuestro sistema, ellos también recibirán la alerta y activarán los protocolos que correspondan.</string>
+    <string name="dialogInicial3"><b>PARA TU SEGURIDAD, POR FAVOR NO MANIPULES EL CELULAR MIENTRAS CONDUCES.</b></string>
+    <string name="sesionLite1">Gracias por contribuir en la búsqueda de vehículos robados, te informamos has alcanzado el límite de escaneos diarios para un usuario "Lite".</string>
+    <string name="sesionLite2">Si quieres utilizar nuestra versión full envíanos un correo a <i>contacto@safebywolf.cl</i></string>
+    <string name="geocoding_dev">AIzaSyDyPPpmOXfXl8SjzZLD-lP5c8j6IxGT5zo</string>
+    <string name="geocoding_prod">AIzaSyAYdDjh1id5-1QV0i5sbiIwKRD_3asi-yc</string>
+    <string name="contacto_ventas">CONTACTO CON VENTAS</string>
+    <string name="exit_app"><b>Salir de la app</b></string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_auto_visto">Auto Visto</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_monitoreo_scanner2">MonitoreoScannerActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_monitoreo_scaner2">MonitoreoScanerActivity2</string>
+
+    <!-- Strings usados para la actividad de contacto -->
+    <string name="mensajeContacto">Escriba su mensaje.</string>
+    <string name="opcionContactoGeneral">Pregunta general</string>
+    <string name="opcionContactoVenta">contacto con ventas</string>
+    <string name="opcionContactoBug">Reportar un error</string>
+
+    <!-- Strings usados para la actividad de encuesta -->
+    <string name="TituloEncuestaPrincipal">¿Se realizó procedimiento del vehículo?</string>
+    <string name="BotonSiEncuestaPrincipal">Si</string>
+    <string name="BotonNoEncuestaPrincipal">No</string>
+    <string name="BotonNoloseEncuestaPrincipal">No lo se</string>
+    <string name="BotonMasTardeEncuestaPrincipal">Preguntar Después</string>
+</resources>

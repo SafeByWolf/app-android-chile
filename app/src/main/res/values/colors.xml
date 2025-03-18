@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Color de los botones -->
+    <color name="colorPrimary">#FF460B</color>
+    <!-- Color de la barra de notificaciones -->
+    <color name="colorPrimaryDark">#FF270B</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#979797</color>
+
+    <color name="colorAccent">#C8FF270B</color>
+    <color name="colorWarning">#FF0000</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#44494B</color>
+    <color name="activityBackground">#FFFFFF</color>
+    <color name="black_alpha_40">#66000000</color>
+    <color name="green">#1C7E07</color>
+
+    <!-- color de la barra de zoom lateral de monitoreo scanner-->
+    <color name="seek_bar_background">#FFFFFF</color>
+    <color name="seek_bar_progress">#FF460B</color>
+    <color name="seek_bar_secondary_progress">#FF460B</color>
+
+</resources>

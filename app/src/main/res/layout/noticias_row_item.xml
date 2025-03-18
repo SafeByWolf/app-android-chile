@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp">
+    <LinearLayout
+        android:id="@+id/linearLayoutNoticias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border_gray"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:weightSum="10"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--LinearLayout texto-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <!--LinearLayout titulo, fecha y autor-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--LinearLayout titulo, fecha y autor-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <!--TextView autor-->
+                    <TextView
+                        android:id="@+id/textViewAutor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:visibility="gone"
+                        android:textSize="10dp"></TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" - "
+                        android:visibility="gone"
+                        android:textSize="10dp"></TextView>
+
+                    <!--TextView fecha-->
+                    <TextView
+                        android:id="@+id/textViewFecha"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="10dp"></TextView>
+                </LinearLayout>
+
+                <!--TextView titulo-->
+                <TextView
+                    android:id="@+id/textViewTitulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:lines="2"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="14dp"></TextView>
+            </LinearLayout>
+
+            <!--LinearLayout contenido-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewContenido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:justificationMode="inter_word"
+                    android:lines="3"
+                    android:text=""
+                    android:textSize="12dp"
+                    ></TextView>
+            </LinearLayout>
+
+            <!--LinearLayout button-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom">
+                <Button
+                    android:id="@+id/buttonVerMas"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:paddingTop="1dp"
+                    android:textSize="12dp"
+                    android:background="@drawable/my_button_primary"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:text="Ver Mas"
+                    android:textStyle="bold"></Button>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--LinearLayout imagen-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="6">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:maxHeight="140dp"
+                android:adjustViewBounds="true"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:layout_weight="14"></ImageView>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
