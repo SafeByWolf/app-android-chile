@@ -243,7 +243,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CompletableFuture;
@@ -466,6 +465,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     FloatingActionButton floatingactionbuttonBattery;
     AlertDialog alertDialogEnciendeGPS;
+    double lastKnownLatitudError20Metros = -1;
+    double lastKnownLongitudError20Metros = -1;
     double lastKnownLatitud = -1;
     double lastKnownLongitud = -1;
     boolean seMantieneLatitudYLongitud = false;
@@ -1396,15 +1397,16 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                         @Override
                         public void run() {
                             getPosiblePatenteRobadaVistaFirebaseObservaCadaVezQueHayaUnCambio();
+                            //observable de la coleccion broadcastMessages
+                            observableMessages();
                         }
                     });
                 } else {
                     Utils.getServerTime(DetectorActivity.this,API_URL,0);
                     getPosiblePatenteRobadaVistaFirebaseObservaCadaVezQueHayaUnCambio();
+                    //observable de la coleccion broadcastMessages
+                    observableMessages();
                 }
-
-                //observable de la coleccion broadcastMessages
-                observableMessages();
             } else {
                 //observable que permite reiniciar un totem
                 observableReiniciarTotem();
@@ -3179,14 +3181,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         if (index == -1) {
             //llamo a onreceive
             Log.v("patenteRobadaVista","isMaxDetection caso 1");
-            /*
-            //si ultimo tiempo de conexion es mayor al tiempo maximo conexion para enviar patente a firebase no hacer nada
-            if(ultimoTiempoDeConexion != 0 && new CurrentDate(new Date()).getDate().getTime() - ultimoTiempoDeConexion > esperaEnvioPatenteFirebaseMilis){
-                Log.v("patenteRobadaVista","se excede tiempo maximo de no conexion a internet: "+ esperaEnvioPatenteFirebaseMilis);
-                return false;
-            }
-             */
-
             PatenteEscaneada patenteEscaneada = new PatenteEscaneada(patente, getLastKnownLatitudString(), getLastKnownLongitudString());
             arrayListPatentesEscaneadasDetection.add(patenteEscaneada);
             return false;
@@ -3206,13 +3200,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     double latitudInicial = Double.parseDouble(hashMapMaxDetection.get(patente).get(0).getLatitud());
                     double longitudInicial = Double.parseDouble(hashMapMaxDetection.get(patente).get(0).getLongitud());
 
-                    double latitudFinal = lastKnownLatitud;
-                    double longitudFinal = lastKnownLongitud;
-
-                    //Log.v("patenteRobadaVista","latitudInicial: "+latitudInicial+" longitudInicial: "+longitudInicial +" latitudFinal: "+latitudFinal+" longitudFinal:"+longitudFinal );
+                    double latitudFinal = lastKnownLatitudError20Metros;
+                    double longitudFinal = lastKnownLongitudError20Metros;
 
                     if(latitudInicial == latitudFinal && longitudInicial == longitudFinal){
-                        //Log.v("patenteRobadaVista","isMaxDetection caso 3.5 "+patente);
                         return true;
                     }
 
@@ -3455,15 +3446,24 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     }
 
+    public String getLastKnownLatitudStringError20Metros() {
+        if(latitudUserFromDB != 0.0f){
+            this.lastKnownLatitudError20Metros = latitudUserFromDB;
+        }
+        return String.valueOf(this.lastKnownLatitud);
+    }
+
+    public String getLastKnownLongitudStringError20Metros() {
+        if(longitudUserFromDB != 0.0f){
+            this.lastKnownLongitudError20Metros = longitudUserFromDB;
+        }
+        return String.valueOf(this.lastKnownLongitud);
+    }
+
     public String getLastKnownLatitudString() {
-        Log.v("Sefaasd2","latitudUserFromDB: "+latitudUserFromDB);
         if(latitudUserFromDB != 0.0f){
             this.lastKnownLatitud = latitudUserFromDB;
-            Log.v("Sefaasd2","es != 0.0  ");
-        } else {
-            Log.v("Sefaasd2","else latitudUserFromDB: "+latitudUserFromDB);
         }
-        Log.v("Sefaasd2","lastKnownLatitud: "+lastKnownLatitud);
         return String.valueOf(this.lastKnownLatitud);
     }
 
@@ -3491,7 +3491,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     public void onComplete(@NonNull Task<Void> task) {
 
 
-                        SendUbicacion sendUbicacion = new SendUbicacion(idUsuarioFirebase, emailUsuarioFirebase, nombreUsuarioFirebase, apellidoUsuarioFirebase, getLastKnownLatitudString(), getLastKnownLongitudString(), currentDate.getFecha(), currentDate.getHora(), currentDate.getLongTime(), patentesArray, idUsuarioFirebase, listaGrupoGlobal, tokenDeviceFirebase, locationAvaible, latitud.toString(), longitud.toString());
+                        SendUbicacion sendUbicacion = new SendUbicacion(idUsuarioFirebase, emailUsuarioFirebase, nombreUsuarioFirebase, apellidoUsuarioFirebase, getLastKnownLatitudStringError20Metros(), getLastKnownLongitudStringError20Metros(), currentDate.getFecha(), currentDate.getHora(), currentDate.getLongTime(), patentesArray, idUsuarioFirebase, listaGrupoGlobal, tokenDeviceFirebase, locationAvaible, latitud.toString(), longitud.toString());
                         //cuando el contador sea igual a 12 quiere decir que ha pasado 1 minuto desde la ultima vez que se envio ubicacion gps
                         // se envia ubicacion gps cada 5 segundos 12*5 = 60 segundos
 
@@ -3576,7 +3576,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             timerTaskSendUbicacionUsuario = new TimerTask() {
                 public void run() {
                     if (isUpdateUbicacionUsuario) {
-                        //Log.v("locationnn", "Task send ubicacion lat: " + lastKnownLatitud + " lng: " + lastKnownLongitud + " location_avaible: " + locationAvaible);
                         //lockUpdateLocationProcess++;
                         updateUbicacionUsuario(lockUpdateLocationProcess);
                     }
@@ -3894,7 +3893,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         List<GroupType> gruposPatente = patenteRobadaVista.getListaGrupoTipo();
         double latitudInicial = Double.parseDouble(patenteRobadaVista.getLatitud());
         double longitudInicial = Double.parseDouble(patenteRobadaVista.getLongitud());
-        boolean verificacionDistancia = isDistanciaMenor(latitudInicial, longitudInicial, latitud, longitud, radioDeInteresAlertaPatenteMetros);
+        boolean verificacionDistancia = isDistanciaMenor(latitudInicial, longitudInicial, lastKnownLatitud, lastKnownLongitud, radioDeInteresAlertaPatenteMetros);
         if(listaGrupoTipoGlobal == null){
             Log.v("lala","verificaTipoGrupoUsuario = null");
             return false;
@@ -4292,9 +4291,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         //verifico si patente tiene su campo verificado en "false"
         boolean isVerificada = patenteRobadaVista.getVerificada().equalsIgnoreCase("false");
 
-        //verifico si la patente que llega se ha dicho antes de X minutos en posiblesPatentesRobadasVistasObservables para no volver a decir que se ha visto una "posible patente robdada"
-        //boolean siTieneUnTiempoMayorAXMinutosSeVaADecir = siTieneUnTiempoMayorAXMinutosSeVaADecir(patenteRobadaVista, 10, posiblesPatentesRobadasVistasObservables);
-
         //se va a decir cuando no existe en posiblesPatentesRobadasVistasObservables
         if(patenteValidaParaHablar(patenteRobadaVista)){
             String text = preAlerta(patenteSeparadaPorPuntosSuspencivos(patenteRobadaVista), patenteRobadaVista);
@@ -4459,7 +4455,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     public void escondePreviewCamara() {
         fullScreenCamera = !fullScreenCamera;
-        LatLng latLng = new LatLng(lastKnownLatitud,lastKnownLongitud);
+        LatLng latLng = new LatLng(lastKnownLatitudError20Metros, lastKnownLongitudError20Metros);
         centrarMapa(latLng);
         cemeraSmallSize();
     }
@@ -5416,7 +5412,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     public float getDistancia(double latitudInicial, double longitudInicial, double latitudFinal, double longitudFinal) {
         if(latitudInicial == 0.0 || longitudInicial == 0.0 || latitudFinal == 0.0 || longitudFinal == 0.0){
-            return 0f;
+            return 999999f;
         }
         Location locationInicial = new Location("patenteLocation");
         locationInicial.setLatitude(latitudInicial);
@@ -5428,35 +5424,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
         float distancia = locationFinal.distanceTo(locationInicial);
         return distancia;
-    }
-
-    public boolean siTieneUnTiempoMayorAXMinutosSeVaADecir(PatenteRobadaVista patenteRobadaVista, float tiempoEnMinutos, ArrayList<PatenteRobadaVista> patentesRobadasVistasArray) {
-        /*
-         * recorre arraylist de patentesRobadasVistasObservables buscando la ultima
-         * patente que coincida con la patente observada si tiene un tiempo mayor a Xmin
-         * se vuelve a decir
-         * */
-
-        int indiceAuxMayor = -1;
-        for (int i = 0; i < patentesRobadasVistasArray.size(); i++) {
-            long tiempoAuxMayor = 0;
-            if (Long.parseLong(patentesRobadasVistasArray.get(i).getLongTime()) > tiempoAuxMayor && patentesRobadasVistasArray.get(i).getPatente().equalsIgnoreCase(patenteRobadaVista.getPatente())) {
-                indiceAuxMayor = i;
-            }
-        }
-        if (indiceAuxMayor > -1) {
-            //encontado
-            long miliseconds = Long.parseLong(patentesRobadasVistasArray.get(indiceAuxMayor).getLongTime());
-            if (Long.parseLong(patenteRobadaVista.getLongTime()) - miliseconds > (60000 * tiempoEnMinutos)) {
-                return true;
-            } else {
-                return false;
-            }
-
-        }
-
-        //no existe patente en array
-        return true;
     }
 
     public String enDireccion(PatenteRobadaVista patenteRobadaVista) {
@@ -5895,10 +5862,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     velocidad = intent.getFloatExtra("speed",0.0f);
 
                    if(latitud != 0.0 && longitud != 0.0){
-                       if((lastKnownLatitud == -1 && lastKnownLongitud == -1) || (!isDistanciaMenor(latitud, longitud,lastKnownLatitud, lastKnownLongitud,20))){
-                           Log.v("lastKnownLatituds","lastKnownLatitud == -1");
-                           lastKnownLatitud = latitud;
-                           lastKnownLongitud = longitud;
+                       lastKnownLatitud = latitud;
+                       lastKnownLongitud = longitud;
+                       if((lastKnownLatitudError20Metros == -1 && lastKnownLongitudError20Metros == -1) || (!isDistanciaMenor(latitud, longitud, lastKnownLatitudError20Metros, lastKnownLongitudError20Metros,20))){
+                           lastKnownLatitudError20Metros = latitud;
+                           lastKnownLongitudError20Metros = longitud;
                            seMantieneLatitudYLongitud = false;
                        } else {
                            seMantieneLatitudYLongitud = true;
@@ -5917,8 +5885,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     lastLocationAvaible = locationAvaible;
                     CurrentDate currentDate = new CurrentDate(new Date());
                     lastLocationAvaibleTime = currentDate.getDate().getTime();
-
-                    Log.v("locationn", "lat: "+ lastKnownLatitud+ " lng: "+lastKnownLongitud + " location_avaible: " + locationAvaible);
 
                     //draw circle location
                     if(!isUserTotem){
@@ -6464,8 +6430,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             //jsoncomuna: {"latitude":-34.9968818,"longitude":-71.2355332,"continent":"América del Sur","lookupSource":"coordinates","continentCode":"SA","localityLanguageRequested":"es","city":"Curicó","countryName":"Chile","countryCode":"CL","postcode":"","principalSubdivision":"Región del Maule","principalSubdivisionCode":"CL-ML","plusCode":"47QC2Q37+6Q","locality":"Curicó","localityInfo":{"administrative":[{"name":"Chile","description":"país de América del Sur","isoName":"Chile","order":3.0,"adminLevel":2.0,"isoCode":"CL","wikidataId":"Q298","geonameId":3895114.0},{"name":"Región del Maule","description":"región de Chile","isoName":"Maule","order":4.0,"adminLevel":4.0,"isoCode":"CL-ML","wikidataId":"Q2166","geonameId":3880306.0},{"name":"Curicó","description":"provincia de Chile","order":5.0,"adminLevel":6.0,"wikidataId":"Q201338","geonameId":3892868.0},{"name":"Curicó","description":"ciudad de Chile","order":6.0,"adminLevel":8.0,"wikidataId":"Q13030","geonameId":3892870.0}],"informative":[{"name":"América del Sur","description":"continente, principalmente en el cuadrante suroeste de la Tierra","order":1.0,"isoCode":"SA","wikidataId":"Q18","geonameId":6255150.0},{"name":"Cordillera de Los Andes","description":"cordillera en Sudamérica occidental","order":2.0,"wikidataId":"Q5456"}]}}
 
             JSONObject objeto = new JSONObject(jsonString);
-
-            Log.v("setCiudad","se setea comuna desde free geocoding: "+objeto.getString("locality") +" lat: "+getLastKnownLatitudString()+" lng: "+getLastKnownLongitudString());
 
             JSONObject localityInfo= objeto.getJSONObject("localityInfo");
             JSONArray administrative = localityInfo.getJSONArray("administrative");
@@ -7632,7 +7596,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     public void updateStatusTotem() {
         Log.v("configTotem","updateTotem");
-        if (textViewCargandoString == null || textViewTBateriaNumero == null || textViewTCPUNumero == null || configurationTotem == null || textViewNivelBateriaNumero == null || this.getLastKnownLatitudString() == null || this.getLastKnownLongitudString() == null) {
+        if (textViewCargandoString == null || textViewTBateriaNumero == null || textViewTCPUNumero == null || configurationTotem == null || textViewNivelBateriaNumero == null || this.getLastKnownLatitudStringError20Metros() == null || this.getLastKnownLongitudStringError20Metros() == null) {
             Log.v("configTotem","algo es nulo");
             return;
         }
@@ -7687,7 +7651,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             Log.v("configTotem", "totem activo por estar bajo la temperatura");
         }
 
-        totem = new Totem(this.idUsuarioFirebase, this.emailUsuarioFirebase, this.listaGrupoGlobal, String.valueOf(currentTemperaturaCPU), String.valueOf(currentTemperaturaBateria), String.valueOf(currentNivelBateria), currentDate.getHora(), activo, inactivoPorTemperatura, this.getLastKnownLatitudString(), this.getLastKnownLongitudString(), this.textViewCargandoString.getText().toString(), currentDate.getFecha(), currentDate.getLongTime(), this.usbCharge, this.acCharge, lastPatenteLeida, false, ipUsuarioFirebase, tagUsuarioFirebase, comunaUserFromDB, temperaturaBateriaAntesDelReposo);
+        totem = new Totem(this.idUsuarioFirebase, this.emailUsuarioFirebase, this.listaGrupoGlobal, String.valueOf(currentTemperaturaCPU), String.valueOf(currentTemperaturaBateria), String.valueOf(currentNivelBateria), currentDate.getHora(), activo, inactivoPorTemperatura, this.getLastKnownLatitudStringError20Metros(), this.getLastKnownLongitudStringError20Metros(), this.textViewCargandoString.getText().toString(), currentDate.getFecha(), currentDate.getLongTime(), this.usbCharge, this.acCharge, lastPatenteLeida, false, ipUsuarioFirebase, tagUsuarioFirebase, comunaUserFromDB, temperaturaBateriaAntesDelReposo);
 
         activaODesactivaTotem();
 
@@ -8463,42 +8427,6 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 crearPosiblePatenteRobadaVistaFirebase(patenteEscaneada, bitmapRectF, isFromDataBase, isEscaneada, indicePatente);
             }
         }
-    }
-
-    public void setComunaYDireccionFromGeocoding(int indicePatente){
-        /*
-        //set la comuna
-        ReverseGeocoding reverseGeocoding = new ReverseGeocoding(lastKnownLatitud, lastKnownLongitud, getApplicationContext());
-        String comuna = null;
-
-        Log.v("comunaRes","comuna es nula se debe setear comuna desde reverse geocoding");
-        String pais = reverseGeocoding.getPais();
-        String region = reverseGeocoding.getRegion();
-        comuna = reverseGeocoding.getComuna();
-        String ciudad = reverseGeocoding.getCiudad();
-
-        if (comuna != null) {
-            comuna = Utils.normalizarString(comuna);
-        }
-        //setea la comuna en patente escaneada
-        patentesEscaneadas.get(indicePatente).setPais(pais);
-        patentesEscaneadas.get(indicePatente).setRegion(region);
-        patentesEscaneadas.get(indicePatente).setComuna(comuna);
-        patentesEscaneadas.get(indicePatente).setCiudad(ciudad);
-
-        //si es totem se trae la comuna desde la base de datos siempre que este setado
-        if(isUserTotem && comunaTotem!=null && !comunaTotem.equalsIgnoreCase("")){
-            patentesEscaneadas.get(indicePatente).setComuna(comunaTotem);
-            patentesEscaneadas.get(indicePatente).setCiudad(comunaTotem);
-            comuna = comunaTotem;
-        }
-
-        //concatena la comuna en los grupos
-        concatenarGrupos(Arrays.asList(comuna),"Comuna", "", patentesEscaneadas.get(indicePatente).getGrupo(), patentesEscaneadas.get(indicePatente).getListaGrupoTipo());
-        //set direccion
-        String direccion = reverseGeocoding.getDireccion();
-        patentesEscaneadas.get(indicePatente).setDireccion(direccion);
-         */
     }
 
     private void crearPosiblePatenteRobadaVistaFirebase(PatenteEscaneada patenteEscaneada, BitmapRectF bitmapRectF, boolean isFromDataBase, boolean isEscaneada, int indicePatente) {
@@ -9895,6 +9823,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
         if (Utils.isDouble(Utils.leerValorString(DetectorActivity.this, Referencias.LATITUD))) {
             latitudUserFromDB = Double.parseDouble(Utils.leerValorString(DetectorActivity.this, Referencias.LATITUD));
+            lastKnownLatitudError20Metros = latitudUserFromDB;
             lastKnownLatitud = latitudUserFromDB;
         } else {
             latitudUserFromDB = 0.0f;
@@ -9902,6 +9831,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
         if (Utils.isDouble(Utils.leerValorString(DetectorActivity.this, Referencias.LONGITUD))) {
             longitudUserFromDB = Double.parseDouble(Utils.leerValorString(DetectorActivity.this, Referencias.LONGITUD));
+            lastKnownLongitudError20Metros = longitudUserFromDB;
             lastKnownLongitud = longitudUserFromDB;
         }else {
             longitudUserFromDB = 0.0f;
