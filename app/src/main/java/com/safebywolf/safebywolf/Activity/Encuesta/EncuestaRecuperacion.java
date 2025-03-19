@@ -114,6 +114,7 @@ public class EncuestaRecuperacion extends DialogFragment {
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                encuesta.setRecuperado(false);
                 dismiss();
             }
         });

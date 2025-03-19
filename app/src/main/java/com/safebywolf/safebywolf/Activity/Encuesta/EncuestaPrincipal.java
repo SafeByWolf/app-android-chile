@@ -114,6 +114,7 @@ public class EncuestaPrincipal extends DialogFragment {
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                encuesta.setRecuperado(false);
                 encuesta.setRespuesta("No");
                 // Crear un Bundle y agregar un parámetro
                 Bundle bundle = new Bundle();
@@ -128,6 +129,7 @@ public class EncuestaPrincipal extends DialogFragment {
         btnNose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                encuesta.setRecuperado(false);
                 encuesta.setRespuesta("No se");
                 // Crear un Bundle y agregar un parámetro
                 Bundle bundle = new Bundle();
