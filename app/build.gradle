@@ -90,6 +90,8 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:${cameraxVersion}"
 
 
+    //de aqui para abajo falta por revisar
+
     implementation "io.grpc:grpc-okhttp:1.32.2"
 
     implementation 'com.github.stepstone-tech.android-material-stepper:espresso-material-stepper:v4.3.1'
