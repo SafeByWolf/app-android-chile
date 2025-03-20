@@ -23,6 +23,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.hardware.Camera;
@@ -34,17 +35,22 @@ import android.media.Image;
 import android.media.Image.Plane;
 import android.media.ImageReader;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Trace;
+
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.safebywolf.safebywolf.Activity.TensorFlow.customview.OverlayView;
 import com.safebywolf.safebywolf.Class.Referencias;
 import com.safebywolf.safebywolf.Class.Utils.Log;
+
+import android.provider.Settings;
 import android.util.Size;
 import android.view.Display;
 import android.view.Gravity;
@@ -72,6 +78,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 
 import com.safebywolf.safebywolf.Activity.TensorFlow.env.ImageUtils;
+import androidx.activity.result.ActivityResultLauncher;
+
 
 public abstract class CameraActivity extends AppCompatActivity
         implements OnImageAvailableListener,
@@ -101,6 +109,7 @@ public abstract class CameraActivity extends AppCompatActivity
   public static final int PERMISSIONS_GPS_REQUEST = 103;
   public static final int PERMISSIONS_TELEPHONE_REQUEST = 104;
   public  static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
+  public  static final int PERMISSIONS_POST_NOTIFICATION = 144;
   int zoomInicial = 0;
   int zoomFinal = 30;
   int progressSeekBarCameraZoom = 21;
@@ -247,6 +256,8 @@ public abstract class CameraActivity extends AppCompatActivity
     } else {
       multiplePermissions();
     }
+
+    solicitarPermisoNotificaciones();
 
     textViewZoom = findViewById(R.id.textViewZoom);
 
@@ -1074,6 +1085,60 @@ public abstract class CameraActivity extends AppCompatActivity
     }
   }
 
+  private final ActivityResultLauncher<String> requestPermissionLauncher =
+          registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                // El usuario denegó el permiso, pero aún podemos mostrar una explicación
+                permissionDialogPostNotification();
+              } else {
+                // El usuario denegó el permiso y seleccionó "No volver a preguntar"
+                mostrarDialogoIrAjustes();
+              }
+            }
+          });
+
+  private void solicitarPermisoNotificaciones() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+      if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+        // Solicita el permiso
+        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+      }
+    }
+  }
+
+  private void permissionDialogPostNotification() {
+    new AlertDialog.Builder(this)
+            .setTitle("Permiso de notificaciones")
+            .setMessage("Necesitamos permiso para enviar notificaciones de alertas") // Agrega tu explicación aquí
+            .setPositiveButton("Entendido", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                ActivityCompat.requestPermissions(CameraActivity.this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        PERMISSIONS_POST_NOTIFICATION);
+              }
+            })
+            .setNegativeButton("Cancelar", null)
+            .show();
+  }
+
+  private void mostrarDialogoIrAjustes() {
+    new AlertDialog.Builder(this)
+            .setTitle("Permiso de notificaciones")
+            .setMessage("Has denegado el permiso de notificaciones. Para activarlo, ve a la configuración de la aplicación.")
+            .setPositiveButton("Ir a ajustes", new DialogInterface.OnClickListener() {
+              @Override
+              public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+              }
+            })
+            .setNegativeButton("Cancelar", null)
+            .show();
+  }
 
   public void permissionDialogPhoneState() {
     new AlertDialog.Builder(CameraActivity.this)

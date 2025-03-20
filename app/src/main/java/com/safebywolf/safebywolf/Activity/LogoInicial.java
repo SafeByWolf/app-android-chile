@@ -27,6 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.FieldValue;
 import com.safebywolf.safebywolf.BuildConfig;
 import com.safebywolf.safebywolf.Class.Referencias;
@@ -77,7 +78,7 @@ public class LogoInicial extends AppCompatActivity {
     int i =0;
     String API_URL;
     ImageView logo_AACH;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db;
     public static final int progress_bar_type = 0;
     private ProgressDialog pDialog;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
@@ -86,6 +87,7 @@ public class LogoInicial extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = FirebaseFirestore.getInstance();
         setContentView(R.layout.activity_logo_inicial_prod);
         //textViewAmbiente=findViewById(R.id.textViewAmbiente);
 
