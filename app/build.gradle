@@ -26,7 +26,7 @@ android {
         applicationId "com.safebywolf.safebywolf"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 79
+        versionCode 80
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
