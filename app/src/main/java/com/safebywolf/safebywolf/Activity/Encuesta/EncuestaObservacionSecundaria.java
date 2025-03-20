@@ -153,7 +153,15 @@ public class EncuestaObservacionSecundaria extends DialogFragment {
             @Override
             public void onClick(View v) {
                 encuesta.setObservacion("");
+                //dismiss();
+                Log.v("ENCUESTAPATRULLERO","[encuestaObservacionSecundaria] me devuelvo a encuesta principal");
                 dismiss();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Encuesta", encuesta);
+                // Mostrar un DialogFragment con el parámetro
+                EncuestaPrincipal dialogFragment = new EncuestaPrincipal();
+                dialogFragment.setArguments(bundle);
+                dialogFragment.show(requireActivity().getSupportFragmentManager(), "dialog_fragment");
             }
         });
 

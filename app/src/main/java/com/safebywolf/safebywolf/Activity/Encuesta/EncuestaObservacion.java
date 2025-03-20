@@ -62,6 +62,9 @@ public class EncuestaObservacion extends DialogFragment {
         Bundle bundle = getArguments();
         if(bundle.containsKey("Encuesta")) {
             encuesta = (EncuestaPatrullero) bundle.getSerializable("Encuesta");
+            if(encuesta.getObservacion() != "") {
+                observacionEncuesta.setText(encuesta.getObservacion());
+            }
             patente.setText(encuesta.getPatente());
             Gson gson = new Gson();
             json = gson.toJson(encuesta);
@@ -87,8 +90,14 @@ public class EncuestaObservacion extends DialogFragment {
         btnVolver.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                encuesta.setObservacion("");
                 dismiss();
+                Log.v("ENCUESTAPATRULLERO","[encuestaObservacion] me devuelvo a encuesta recuperacion");
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Encuesta", encuesta);
+                // Mostrar un DialogFragment con el parámetro
+                EncuestaRecuperacion dialogFragment = new EncuestaRecuperacion();
+                dialogFragment.setArguments(bundle);
+                dialogFragment.show(requireActivity().getSupportFragmentManager(), "dialog_fragment");
             }
         });
 

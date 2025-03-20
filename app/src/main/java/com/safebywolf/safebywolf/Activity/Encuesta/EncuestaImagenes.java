@@ -184,6 +184,8 @@ public class EncuestaImagenes extends DialogFragment {
             @Override
             public void onClick(View v) {
                 // Crear un Bundle y agregar un parámetro
+                Log.v("ENCUESTAPATRULLERO","[encuestaImagen] me devuelvo a encuesta observacion");
+                dismiss();
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("Encuesta", encuesta);
                 // Mostrar un DialogFragment con el parámetro

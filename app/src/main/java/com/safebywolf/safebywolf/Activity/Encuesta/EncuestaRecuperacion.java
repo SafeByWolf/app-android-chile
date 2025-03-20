@@ -115,7 +115,15 @@ public class EncuestaRecuperacion extends DialogFragment {
             @Override
             public void onClick(View view) {
                 encuesta.setRecuperado(false);
+                encuesta.setObservacion("");
+                Log.v("ENCUESTAPATRULLERO","[encuestaRecuperacion] me devuelvo a encuesta principal");
                 dismiss();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Encuesta", encuesta);
+                // Mostrar un DialogFragment con el parámetro
+                EncuestaPrincipal dialogFragment = new EncuestaPrincipal();
+                dialogFragment.setArguments(bundle);
+                dialogFragment.show(requireActivity().getSupportFragmentManager(), "dialog_fragment");
             }
         });
         return dialog;
